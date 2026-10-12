@@ -1,15 +1,13 @@
 ![EXP tracker preview](/misc/exp-tracker-preview.png)
 
 # MapleStory Classic World EXP & Meso rate tracker
-An overlay for tracking EXP & Meso rates in MapleStory Classic World. 
-
-The exe isn't code-signed, so Windows SmartScreen or an antivirus may warn about it the first time.
+An overlay for tracking EXP & Meso rates in MapleStory Classic World.
 
 ## How it works
 This program uses image recognition to read the values in your in-game UI every second to compute rates over time. It does not read from or write to game memory, interact with network packets, or interact with any other programs or files in any way. The program only scans for the game fonts used in specific areas of the UI, namely: current EXP above the EXP meter, current mesos in the inventory window (if open), and current potions in quick slots (if open, for calculating potion cost).
 
 > [!CAUTION]
-> This program is designed simply with the intention of allowing players to make informed decisions. It should not be modified in any way to abuse or exploit the game. Additionally, while the program is simply reading text in the game, it has not been directly audited by Nexon and thus the author(s) take no responsibility for any action taken against your account. Finally, only download executable files from the original author(s) and from sources that you trust.
+> This program is designed simply with the intention of allowing players to make informed decisions. It should not be modified in any way to abuse or exploit the game. Additionally, while the program is simply reading text in the game, it has not been directly audited by Nexon and thus the author(s) take no responsibility for any action taken against your account. Finally, only download executable files from the original author(s) and from sources that you trust. The exe isn't code-signed, so Windows SmartScreen or an antivirus may warn about it the first time.
 
 ## Setup
 Downloads are available in [releases](https://github.com/luk-gg/classic-world-exp-tracker/releases).  
