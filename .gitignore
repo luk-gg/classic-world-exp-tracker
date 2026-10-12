@@ -1,0 +1,8 @@
+# build output
+build/
+dist/
+__pycache__/
+*.pyc
+
+# YOUR data: settings, what you taught the quick-slot reader, window position. Never commit this.
+exp_tracker_data/

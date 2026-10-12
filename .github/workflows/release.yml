@@ -1,0 +1,50 @@
+# Every push to main: run the tests, build MapleEXPTracker.exe, and publish it as a new GitHub release (v1.0.<run number>).
+# Put [skip release] in a commit message to skip all of this for that push (docs, typos...).
+name: Test, build and release
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write            # needed to create the release
+
+concurrency:
+  group: release
+  cancel-in-progress: false  # two quick pushes: build one after the other, never both at once
+
+jobs:
+  release:
+    if: github.event_name == 'workflow_dispatch' || !contains(github.event.head_commit.message, '[skip release]')
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+          cache-dependency-path: |
+            requirements.txt
+            requirements-dev.txt
+
+      - name: Install
+        run: pip install -r requirements.txt -r requirements-dev.txt
+
+      - name: Tests
+        run: python -m unittest
+
+      - name: Build the exe
+        run: python -m PyInstaller --noconfirm --clean exp_tracker.spec
+
+      - name: Publish the release
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TAG="v1.0.${{ github.run_number }}"
+          gh release create "$TAG" dist/MapleEXPTracker.exe \
+            --target "${{ github.sha }}" \
+            --title "$TAG" \
+            --generate-notes
